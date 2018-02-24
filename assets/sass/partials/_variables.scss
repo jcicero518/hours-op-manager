@@ -1,0 +1,60 @@
+/* Color palette */
+
+$dark-blue-green: #006747;
+$sickly-yellow: #c9db48;
+$light-grey: #efede7;
+$black: #000000;
+$dark-sky-blue: #27a1d6;
+$warm-grey: #a1978c;
+$pinkish-grey: #c3bdb1;
+$greyish-brown: #5c564d;
+$brownish-grey: #827566;
+$light-grey-two: #e0dbd2;
+$ocean-green: #2e886c;
+$yellow-orange: #eaaa00;
+$rusty-orange: #cb6015;
+$marine-blue: #003c71;
+$medium-green: #40ad48;
+$duck-egg-blue: #c6eafb;
+$powder-blue: #b9e5fa;
+$light-khaki: #f9f2dd;
+$nice-blue: #187aba;
+$dark-sky-blue-two: #3cb6ec;
+$warm-purple: #6f2c91;
+$ocean-blue: #005cb8;
+$sandy-yellow: #ffeb7d;
+$marine-blue-two: #00395d;
+$brown-grey: #827e6f;
+$bland: #b1ab93;
+$windows-blue: #4085ca;
+$windows-blue-two: #4c8dcd;
+$white: #ffffff;
+$yellow-orange-two: #e9aa00;
+$dull-yellow: #e8d162;
+$grey-blue: #66889e;
+$azure: #00a3e3;
+$squash: #f5a623;
+$pinkish-grey-two: #dfd9c4;
+$violet: #bd10e0;
+$beige: #f5f1e2;
+$light-blue-grey: #d8e7f5;
+$dark-lime: #98b93c;
+$shamrock: #00aa63;
+
+$lightred: #f12e50;
+$red: #ee0c4b;
+$darkred: #c80e3d;
+
+@mixin read-more-link {
+  font-size: 12px;
+  line-height: 15px;
+  font-family: $roboto;
+  font-weight: 900;
+  text-transform: uppercase;
+  a {
+    color: $ocean-blue;
+    &:hover {
+      color: $azure;
+    }
+  }
+}

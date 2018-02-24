@@ -1,0 +1,15 @@
+{
+  "entry": {
+    "main": [
+      "./assets/scripts/app.js",
+      "./assets/sass/style.scss"
+    ]
+  },
+  "publicPath": "/",
+  "devUrl": "http://mariacollege.test/wp-admin/admin.php?page=manage-hours-of-operation",
+  "proxyUrl": "http://localhost:3000",
+  "cacheBusting": "[name]_[hash:8]",
+  "watch": [
+    "**/*.php"
+  ]
+}
