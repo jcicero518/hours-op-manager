@@ -68,7 +68,8 @@ class Actions {
 
 	    if ( $env === 'development' ) {
 		    wp_enqueue_style( 'hours-op-manager-admin-css', HOURS_OP_MANAGER_BASE_PATH . 'dist/appStyle.min.css' );
-		    //wp_enqueue_script( 'hours-op-manager-admin-hot', HOURS_OP_MANAGER_BASE_PATH . 'dist/hot.bundle.js', [], '1.0', true );
+		    wp_enqueue_script( 'hours-op-manager-admin-manifest', HOURS_OP_MANAGER_BASE_PATH . 'dist/manifest.bundle.js', [], '1.0', true );
+		    wp_enqueue_script( 'hours-op-manager-admin-vendor', HOURS_OP_MANAGER_BASE_PATH . 'dist/vendor.bundle.js', [], '1.0', true );
 		    wp_enqueue_script( 'hours-op-manager-admin', HOURS_OP_MANAGER_BASE_PATH . 'dist/app.bundle.js', ['jquery'], '1.0', true );
 		    wp_localize_script( 'hours-op-manager-admin', 'HOM_WP_API', [
 		       'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -81,6 +82,8 @@ class Actions {
             ]);
 	    } else {
 		    wp_enqueue_style( 'hours-op-manager-admin-css', HOURS_OP_MANAGER_BASE_PATH . 'build/dist/appStyle.min.css' );
+		    wp_enqueue_script( 'hours-op-manager-admin-manifest', HOURS_OP_MANAGER_BASE_PATH . 'dist/manifest.bundle.js', [], '1.0', true );
+		    wp_enqueue_script( 'hours-op-manager-admin-vendor', HOURS_OP_MANAGER_BASE_PATH . 'build/dist/vendor.bundle.js', [], '1.0', true );
 		    wp_enqueue_script( 'hours-op-manager-admin', HOURS_OP_MANAGER_BASE_PATH . 'build/dist/app.bundle.js', [], '1.0', true );
 		    wp_localize_script( 'hours-op-manager-admin', 'HOM_WP_API', [
 			    'ajax_url' => admin_url( 'admin-ajax.php' ),

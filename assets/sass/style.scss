@@ -39,19 +39,23 @@
 }
 
 .departments-outer-container {
-  opacity: 1;
-  visibility: visible;
-  //transition: all 1s linear;
-  animation: hom-fadein 1s linear;
-  &.initial-container {
-    animation: none;
+  width: 100%;
+
+  .main-ui-flex-wrapper {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    width: 100%;
+    .accordion-wrapper {
+      width: 65%;
+    }
+    .feedback-wrapper {
+      margin: auto;
+      width: 35%;
+      align-self: center;
+    }
   }
 
-  &.show {
-    opacity: 1;
-    visibility: visible;
-    transition: all 1s linear;
-  }
 }
 
 .hours-op-manager-container {

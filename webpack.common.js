@@ -6,6 +6,7 @@ const BrowserSyncPlugin = require( 'browser-sync-webpack-plugin' );
 const CleanWebpackPlugin = require( 'clean-webpack-plugin' );
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const StyleExtHtmlWebpackPlugin = require('style-ext-html-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 
 const config = require('./assets/config.json');
 
@@ -13,14 +14,20 @@ module.exports = {
     entry: {
         //hot: 'webpack-hot-middleware/client?reload=true',
         app: './assets/scripts/custom/app.js',
-        appStyle: './assets/sass/style.scss'
+        appStyle: './assets/sass/style.scss',
+        vendor: ['react', 'lodash']
     },
     devtool: 'inline-source-map',
     plugins: [
         new CleanWebpackPlugin( ['dist'] ),
-        /*new webpack.optimize.CommonsChunkPlugin({
+	    new webpack.NamedModulesPlugin(),
+        //new webpack.HashedModuleIdsPlugin(), // for production only
+        new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor'
-        }),*/
+        }),
+	    new webpack.optimize.CommonsChunkPlugin({
+		    name: 'manifest'
+	    }),
         /*new webpack.optimize.CommonsChunkPlugin({
             name: 'runtime'
         }),*/
@@ -30,22 +37,30 @@ module.exports = {
             filename: '[name].min.css',
             allChunks: true
         }),
+
         //new webpack.HotModuleReplacementPlugin(),
         new StyleExtHtmlWebpackPlugin({
             minify: true
         }),
-        new BrowserSyncPlugin({
-            //proxy: config.proxyUrl,
-            proxy: config.devUrl,
-            files: [
-                '**/*.php'
-            ],
-            reloadDelay: 0
-        })
+	    new BrowserSyncPlugin({
+		    //proxy: config.proxyUrl,
+		    proxy: config.devUrl,
+		    files: config.watch,
+		    reloadDelay: config.reloadDelay,
+            injectChanges: true
+	    })
+        /*new WorkboxPlugin({
+	        // these options encourage the ServiceWorkers to get in there fast
+	        // and not allow any straggling "old" SWs to hang around
+	        clientsClaim: true,
+	        skipWaiting: true
+        })*/
+
     ],
     output: {
         path: path.resolve(__dirname, 'dist'), // the target directory for all output - files must be an absolute path
         filename: '[name].bundle.js', // the filename template for entry chunks - https://webpack.js.org/configuration/output/#output-filename
+        //chunkFilename: '[name].vendor.bundle.js',
         publicPath: '/' // // the url to the output directory resolved relative to the HTML page
     },
     module: {

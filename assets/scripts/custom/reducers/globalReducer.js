@@ -26,12 +26,11 @@ import {
 	SET_DEPTS_ORDER,
 	SET_ACTIVE_PANE,
 	SET_ACTIVE_MODAL,
+	SET_LOADING,
 	LOAD_REPOS_SUCCESS,
 	LOAD_REPOS,
 	LOAD_REPOS_ERROR,
-} from "../constants/constants";
-
-import toastr from "toastr";
+} from "../actions/actionTypes";
 
 // The initial state of the App
 const initialState = fromJS({
@@ -52,46 +51,66 @@ const initialState = fromJS({
 });
 
 function appReducer(state = initialState, action) {
-	console.log(action, 'action');
 
 	switch (action.type) {
+		case SET_LOADING:
+			return state.set('loading', true);
 		case CREATE_DEPT:
-			const departments = state.get('departments');
-			departments.concat([{
+			const updatedDepartments = state.get('departments').concat([{
 				id: action.department.id,
 				label: action.department.label
 			}]);
-			return state.set('loading', true).set('departments', departments);
+			return state
+			.set('loading', true)
+			.set('departments', updatedDepartments);
 		case CREATE_DEPT_SUCCESS:
 			// added new dept action.newDepartment
-			return state.set('departments', state.get('departments') ).set('loading', false).set('error', false);
+			return state
+			.set('departments', state.get('departments') )
+			.set('error', false);
 		case CREATE_DEPT_ERROR:
-			return state.set('error', action.error).set('loading', false);
+			return state
+			.set('error', action.error)
+			.set('loading', false);
 		case LOAD_DEPTS:
-			return state.set('loading', true).set('error', false).set('departments', false);
+			return state
+			.set('loading', true)
+			.set('error', false)
+			.set('departments', false);
 		case LOAD_DEPTS_SUCCESS:
-			return state.set('departments', action.departments).set('loading', false).set('error', false);
+			return state
+			.set('departments', action.departments)
+			.set('loading', false)
+			.set('error', false);
 		case LOAD_DEPTS_ERROR:
-			return state.set('error', action.error).set('loading', false);
+			return state
+			.set('error', action.error)
+			.set('loading', false);
 		case DELETE_DEPT:
-			return state.set('loading', true).set('departments', state.get('departments').filter( dept => {
+			return state
+			.set('loading', true)
+			.set('departments', state.get('departments').filter( dept => {
 				return dept.id !== action.department.id
 			}));
 		case DELETE_DEPT_SUCCESS:
 			return state
 			.set('departments', state.get('departments') )
-			.set('loading', false)
 			.set('error', false)
 			.set('displayMessage', true)
 			.set('successMessage', action.message);
 		case DELETE_DEPT_ERROR:
-			return state.set('error', action.error).set('loading', false);
+			return state
+			.set('error', action.error)
+			.set('loading', false);
 		case SET_DEPTS_ORDER:
-			return state.set('departments', __.sortBy( state.get('departments'), 'label' ) );
+			return state
+			.set('departments', __.sortBy( state.get('departments'), 'label' ) );
 		case SET_ACTIVE_PANE:
-			return state.set('activePane', action.activePane);
+			return state
+			.update( 'activePane', activePane => action.activePane );
 		case SET_ACTIVE_MODAL:
-			return state.set('activeModal', !state.get('activeModal') );
+			return state
+			.set('activeModal', !state.get('activeModal') );
 		case LOAD_REPOS:
 			return state
 			.set('loading', true)

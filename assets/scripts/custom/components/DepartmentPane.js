@@ -32,9 +32,9 @@ class DepartmentPane extends Component {
 		let _ = this;
 		let clickedPane = event.target;
 		let expanded = clickedPane.getAttribute( 'aria-expanded' ) === "true";
-		_.setState( prevState => ({
-			currentPaneExpanded: prevState.currentPaneExpanded === expanded ? -1 : expanded
-		}));
+		_.setState({
+			currentPaneExpanded: expanded
+		});
 
 		_.props.handlePaneClick( clickedPane, expanded );
 	}

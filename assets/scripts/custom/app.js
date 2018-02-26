@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import {
 	ConnectedRouter
 } from 'react-router-redux';
-import { AppContainer } from "react-hot-loader";
+//import { AppContainer } from "react-hot-loader";
 import createHistory from 'history/createBrowserHistory';
 import FontFaceObserver from "fontfaceobserver";
 import toastr from "toastr";
@@ -52,14 +52,14 @@ const render = () => {
 	ReactDOM.render(
 		<Provider store={store}>
 			<ConnectedRouter history={history}>
-				<App />
+				<DepartmentsContainer />
 			</ConnectedRouter>
 		</Provider>,
 		MOUNT_NODE
 	)
 };
 
-/*if (module.hot) {
+if (module.hot) {
 	// Hot reloadable React components and translation json files
 	// modules.hot.accept does not accept dynamic dependencies,
 	// have to be constants at compile-time
@@ -69,8 +69,8 @@ const render = () => {
 	});
 } else {
 	render();
-}*/
-render();
+}
+
 
 if ( MOUNT_NODE ) {
 	//ReactDOM.render( <DepartmentsContainer />, MOUNT_NODE );

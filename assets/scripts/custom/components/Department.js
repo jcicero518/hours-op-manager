@@ -24,7 +24,7 @@ class Department extends Component {
 		let paneId = clickedPane.getAttribute( 'aria-controls' ).replace( 'dept_pane_', '' );
 		_.props.setActivePane( paneId, expanded );
 
-		_.showHidePanel();
+		//_.showHidePanel();
 	}
 
 	handleDelete( event ) {
@@ -42,7 +42,6 @@ class Department extends Component {
 	render() {
 		const {expanded} = this.state;
 		const {activePane, id} = this.props;
-
 		const isExpanded = activePane === id;
 
 		return (

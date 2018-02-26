@@ -1,12 +1,15 @@
 /*global HOM_WP_API */
+
+/**
+ * React / Redux core
+ */
 import React, {Component} from "react";
 import { connect } from 'react-redux';
-import {
-	Router,
-	Route,
-	Switch
-} from "react-router-dom";
 import { compose } from 'redux';
+
+/**
+ * Re-Selectors
+ */
 import { createStructuredSelector } from 'reselect';
 import {
 	makeSelectDepts,
@@ -19,25 +22,40 @@ import {
 	makeSelectLoading,
 	makeSelectLocation
 } from "../selectors/selectors";
+
+/**
+ * Action Creators
+ */
 import {
 	createDept,
 	loadDepts,
+	deptsLoaded,
+	deleteDept,
+	deptsDeletedError,
+	setDeptsOrder,
 	receivedCreateRequest,
 	receivedLoadRequest,
 	receivedDeleteRequest,
-	deleteDept,
-	deptsDeletedError,
-	deptsLoaded,
-	setDeptsOrder,
+} from "../actions/departmentActions";
+import {setActiveModal} from "../actions/modalActions";
+import {
 	setActivePane,
-	setActiveModal
-} from "../actions/actions";
-import reducer from "../reducers/reducers";
+	receivedPaneRequest
+} from "../actions/panelActions";
+
+/**
+ * 3rd Party Components
+ */
 import Spinner from "react-spinkit";
+import toastr from "toastr";
+
+/**
+ * Main Components
+ */
 import Department from "./Department";
 import DepartmentPanelRow from "./DepartmentPanelRow";
 import Modal from "./Modal";
-import toastr from "toastr";
+
 
 class DepartmentsContainer extends Component {
 
@@ -89,17 +107,6 @@ class DepartmentsContainer extends Component {
 
 		departments ? output = (
 			<div className="departments-outer-container">
-				<Spinner className={spinnerClass} name="double-bounce" color="#0B568A" fadeIn="none" />
-				<div id="department-accordion" className="container accordion accordion-container">
-					<h3>Departments <button onClick={_.props.setActiveModal} className="page-title-action">Add New Department</button></h3>
-
-					{departments.map( dept => (
-						<DepartmentPanelRow key={dept.id} {...dept}>
-							<Department activePane={activePane} setActivePane={_.props.setActivePane} handleDelete={_.props.deleteDepartment} key={dept.id} {...dept} />
-						</DepartmentPanelRow>
-					))}
-
-				</div>
 				<Modal
 					activateModal={activeModal}
 					handleCreateDepartment={_.props.createDepartment}
@@ -107,9 +114,28 @@ class DepartmentsContainer extends Component {
 					coverClass={coverClass}
 					modalContainerClass={modalContainerClass}
 					modalClass={modalClass} />
+
+				<div className="main-ui-flex-wrapper">
+					<div className="accordion-wrapper">
+						<div id="department-accordion" className="container accordion accordion-container">
+							<h3>Departments <button onClick={_.props.setActiveModal} className="page-title-action">Add New Department</button></h3>
+
+							{departments.map( dept => (
+								<DepartmentPanelRow key={dept.id} {...dept}>
+									<Department activePane={activePane} setActivePane={_.props.setActivePane} handleDelete={_.props.deleteDepartment} key={dept.id} {...dept} />
+								</DepartmentPanelRow>
+							))}
+
+						</div>
+
+					</div>
+					<div className="feedback-wrapper">
+						<Spinner className={spinnerClass} name="double-bounce" color="#0B568A" fadeIn="none" />
+					</div>
+				</div>
 			</div>
 		) : output = initialOutput;
-
+		console.log(this, 'this');
 		return output;
 	}
 }
@@ -144,13 +170,6 @@ const mapStateToProps = createStructuredSelector({
 	loading: makeSelectLoading(),
 	error: makeSelectError()
 });
-
-/*const mapStateToProps = ( state ) => {
-	console.log(state.get('departments'), 'state in mapstatetoprops');
-	return {
-		departments: state.departments
-	}
-};*/
 
 export default connect( mapStateToProps, mapDispatchToProps )( DepartmentsContainer );
 

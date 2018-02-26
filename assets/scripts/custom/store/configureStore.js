@@ -1,14 +1,13 @@
 import {createStore, applyMiddleware, compose} from "redux";
 import createReducer from "../reducers/reducers";
-import {loadDepts, deptsLoaded, deptsLoadingError, receivedLoadRequest} from "../actions/actions";
+import {loadDepts} from "../actions/departmentActions";
 import {fromJS} from "immutable";
 import {routerMiddleware} from "react-router-redux";
 import thunk from "redux-thunk";
 
-
 export default function configureStore( initialState = {}, history ) {
 	// Create the store with two middlewares
-	// 1. sagaMiddleware: Makes redux-sagas work
+	// 1. thunks
 	// 2. routerMiddleware: Syncs the location/URL path to the state
 	const middlewares = [
 		thunk,
@@ -40,19 +39,6 @@ export default function configureStore( initialState = {}, history ) {
 	);
 
 	store.dispatch( loadDepts() );
-
-	// Extensions
-	//store.runSaga = sagaMiddleware.run;
-	//store.injectedReducers = {}; // Reducer registry
-	//store.injectedSagas = {}; // Saga registry
-
-	// Make reducers hot reloadable, see http://mxs.is/googmo
-	/* istanbul ignore next */
-	//if (module.hot) {
-	//	module.hot.accept('./reducers', () => {
-	//		store.replaceReducer(createReducer(store.injectedReducers));
-	//	});
-	//}
 
 	return store;
 }

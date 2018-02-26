@@ -1,7 +1,6 @@
 /*global HOM_WP_API */
 import PropTypes from 'prop-types'
 import React, {Component} from "react";
-import ReactDOM from "react-dom";
 import axios, {post} from "axios";
 import toastr from "toastr";
 import {tween, physics, styler, easing, value} from "popmotion";
