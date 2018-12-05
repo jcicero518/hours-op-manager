@@ -11,7 +11,7 @@
  */
 
 import { fromJS } from 'immutable';
-import __ from "lodash";
+import ld from "lodash";
 
 import {
 	CREATE_DEPT,
@@ -49,6 +49,8 @@ const initialState = fromJS({
 	displayMessage: false,
 	successMessage: null
 });
+
+let __ = ld.noConflict();
 
 function appReducer(state = initialState, action) {
 

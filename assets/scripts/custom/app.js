@@ -6,13 +6,13 @@ import { Provider } from "react-redux";
 import {
 	ConnectedRouter
 } from 'react-router-redux';
-//import { AppContainer } from "react-hot-loader";
+
 import createHistory from 'history/createBrowserHistory';
 import FontFaceObserver from "fontfaceobserver";
 import toastr from "toastr";
 
 import configureStore from "./store/configureStore";
-import App from "./components/App";
+//import App from "./components/App";
 import DepartmentsContainer from "./components/DepartmentsContainerRedux";
 
 toastr.options = {
@@ -37,7 +37,7 @@ toastr.options = {
 const sansObserver = new FontFaceObserver( 'Open Sans', {} );
 
 sansObserver.load().then( result => {
-	console.log(result, 'result');
+	console.log(result, 'Loaded fonts');
 }).catch( error => {
 	console.warn( error );
 });
@@ -68,7 +68,9 @@ if (module.hot) {
 		render();
 	});
 } else {
-	render();
+	if ( MOUNT_NODE ) {
+		render();
+	}
 }
 
 

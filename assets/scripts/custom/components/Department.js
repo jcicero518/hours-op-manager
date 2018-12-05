@@ -7,11 +7,7 @@ class Department extends Component {
 
 	constructor( props ) {
 		super( props );
-		this.state = {
-			expanded: false
-		};
 		this.handleClick = this.handleClick.bind( this );
-		this.handleDelete = this.handleDelete.bind( this );
 	}
 
 	componentDidMount() {
@@ -23,29 +19,15 @@ class Department extends Component {
 		let _ = this;
 		let paneId = clickedPane.getAttribute( 'aria-controls' ).replace( 'dept_pane_', '' );
 		_.props.setActivePane( paneId, expanded );
-
-		//_.showHidePanel();
-	}
-
-	handleDelete( event ) {
-		let _ = this;
-		_.props.handleDelete( event );
-	}
-
-	showHidePanel() {
-		let _ = this;
-		this.setState({
-			expanded: !this.state.expanded
-		})
 	}
 
 	render() {
-		const {expanded} = this.state;
-		const {activePane, id} = this.props;
+		const _ = this;
+		const {activePane, id, handleDelete} = _.props;
 		const isExpanded = activePane === id;
 
 		return (
-			<DepartmentPane expanded={isExpanded} handleDeleteClick={this.handleDelete} handlePaneClick={this.handleClick} {...this.props} />
+			<DepartmentPane expanded={isExpanded} handleDeleteClick={handleDelete} handlePaneClick={_.handleClick} {...this.props} />
 		)
 	}
 }

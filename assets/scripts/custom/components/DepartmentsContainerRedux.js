@@ -61,6 +61,8 @@ class DepartmentsContainer extends Component {
 
 	constructor( props ) {
 		super( props );
+		let _ = this;
+		_.cache = {};
 	}
 
 	componentDidMount() {
@@ -69,7 +71,7 @@ class DepartmentsContainer extends Component {
 
 	render() {
 		let _ = this;
-		let spinnerClass, hasDepartments;
+		let spinnerClass;
 		const {
 			loading,
 			error,
@@ -86,9 +88,6 @@ class DepartmentsContainer extends Component {
 		loading
 			? spinnerClass = 'bigger-spinner is-active'
 			: spinnerClass = '';
-		departments && departments.length
-			? hasDepartments = ''
-			: hasDepartments = 'Get started by adding a new department.';
 
 		if ( displayMessage ) {
 			toastr.success( successMessage, 'Success!' );
@@ -121,9 +120,7 @@ class DepartmentsContainer extends Component {
 							<h3>Departments <button onClick={_.props.setActiveModal} className="page-title-action">Add New Department</button></h3>
 
 							{departments.map( dept => (
-								<DepartmentPanelRow key={dept.id} {...dept}>
-									<Department activePane={activePane} setActivePane={_.props.setActivePane} handleDelete={_.props.deleteDepartment} key={dept.id} {...dept} />
-								</DepartmentPanelRow>
+								<Department activePane={activePane} setActivePane={_.props.setActivePane} handleDelete={_.props.deleteDepartment} key={dept.id} {...dept} />
 							))}
 
 						</div>
@@ -135,7 +132,7 @@ class DepartmentsContainer extends Component {
 				</div>
 			</div>
 		) : output = initialOutput;
-		console.log(this, 'this');
+
 		return output;
 	}
 }

@@ -22,7 +22,7 @@ define( 'HOURS_OP_MANAGER_SCHEMA', '1.0' );
 global $wpdb;
 
 if ( ! defined( 'HOURS_OP_MANAGER_CURRENT_ENVI' ) ) {
-	define( 'HOURS_OP_MANAGER_CURRENT_ENVI', 'development' );
+	define( 'HOURS_OP_MANAGER_CURRENT_ENVI', 'production' );
 }
 
 if ( ! defined( 'HOURS_TABLE' ) ) {

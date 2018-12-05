@@ -25,6 +25,7 @@ class Actions {
         $this->hoursRepository = new HoursRepository( Connection::getInstance() );
         static::$pages = new Pages();
         $this->carbonDate = new Date();
+        $this->displayHoursTable();
     }
 
 	/**
@@ -82,7 +83,7 @@ class Actions {
             ]);
 	    } else {
 		    wp_enqueue_style( 'hours-op-manager-admin-css', HOURS_OP_MANAGER_BASE_PATH . 'build/dist/appStyle.min.css' );
-		    wp_enqueue_script( 'hours-op-manager-admin-manifest', HOURS_OP_MANAGER_BASE_PATH . 'dist/manifest.bundle.js', [], '1.0', true );
+		    wp_enqueue_script( 'hours-op-manager-admin-manifest', HOURS_OP_MANAGER_BASE_PATH . 'build/dist/manifest.bundle.js', [], '1.0', true );
 		    wp_enqueue_script( 'hours-op-manager-admin-vendor', HOURS_OP_MANAGER_BASE_PATH . 'build/dist/vendor.bundle.js', [], '1.0', true );
 		    wp_enqueue_script( 'hours-op-manager-admin', HOURS_OP_MANAGER_BASE_PATH . 'build/dist/app.bundle.js', [], '1.0', true );
 		    wp_localize_script( 'hours-op-manager-admin', 'HOM_WP_API', [
@@ -125,7 +126,7 @@ class Actions {
 			$formattedBeginDate = $this->carbonDate->getFormattedDate( $hoursInstance['begin_date'], 'F d, Y' );
             ?>
             <div class="hours-op-table-container">
-            <<?= $args['headertag']; ?>><?= $args['headertext']; ?></<?= $args['headertag']; ?>>
+
             <<?= $args['subheadtag']; ?>>Week of <?= $formattedBeginDate ?></<?= $args['subheadtag']; ?>>
 
             <table>

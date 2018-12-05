@@ -132,7 +132,6 @@ export function receivedCreateRequest( department ) {
 			dispatch( createDept( newDepartment ) );
 			return newDepartment;
 		}).then( newDept => {
-			console.log(newDept, 'then passed response');
 			dispatch( deptCreated( newDept ) );
 			dispatch( receivedLoadRequest() );
 		}).catch( err => {

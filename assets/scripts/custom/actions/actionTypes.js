@@ -11,6 +11,9 @@
 
 export const SET_LOADING = 'hours-op-manager/SET_LOADING';
 
+export const FILE_UPLOAD = 'hours-op-manager/FILE_UPLOAD';
+export const FILE_UPLOAD_SUCCESS = 'hours-op-manager/FILE_UPLOAD_SUCCESS';
+
 export const CREATE_DEPT = 'hours-op-manager/CREATE_DEPT';
 export const CREATE_DEPT_SUCCESS = 'hours-op-manager/CREATE_DEPT_SUCCESS';
 export const CREATE_DEPT_ERROR = 'hours-op-manager/CREATE_DEPT_ERROR';

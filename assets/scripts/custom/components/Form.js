@@ -108,7 +108,7 @@ class Form extends Component {
 	}
 
 	render() {
-		const {departmentId, departmentLabel} = this.props;
+		const {departmentId, departmentLabel, handleDelete} = this.props;
 		const {submitted, validationError} = this.state;
 
 		const lastUploaded = this.store.getUploadsOption( `_transient__hours_op_manager_last_upload_${departmentId}` );
@@ -138,7 +138,12 @@ class Form extends Component {
 					</form>
 					<div className="message-container">
 						<label>Other Actions</label>
-						<button onClick={this.handleDelete} name="delete" id={`dept_delete_${departmentId}`} value={departmentId} data-label={`${departmentLabel}`}>Delete</button>
+						<button onClick={handleDelete}
+						        name="delete"
+						        id={`dept_delete_${departmentId}`}
+						        value={departmentId}
+						        data-label={`${departmentLabel}`}>Delete
+						</button>
 						<Actions displayButton={(lastUploaded !== 'N/A' || submitted === true)} copyTarget={`shortcode_id_${departmentId}`} />
 					</div>
 				</div>

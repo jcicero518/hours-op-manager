@@ -1,7 +1,9 @@
 import React, {Component} from "react";
-import ReactDOM from "react-dom";
 import PropTypes from 'prop-types'
 import Form from "./Form";
+import styled, {css} from "styled-components";
+import DivPanel from "../styled-components/DIV";
+import H3 from "../styled-components/H3";
 import {CSSTransitionGroup} from "react-transition-group";
 
 class DepartmentPane extends Component {
@@ -14,7 +16,6 @@ class DepartmentPane extends Component {
 		};
 
 		this.onPaneClick = this.onPaneClick.bind( this );
-		this.handleDelete = this.handleDelete.bind( this );
 	}
 
 	/*componentDidMount() {
@@ -39,14 +40,9 @@ class DepartmentPane extends Component {
 		_.props.handlePaneClick( clickedPane, expanded );
 	}
 
-	handleDelete( event ) {
-		let _ = this;
-		_.props.handleDeleteClick( event );
-	}
-
 	render() {
 		const {height, currentPaneExpanded} = this.state;
-		const {id, label, expanded, activePane} = this.props;
+		const {id, label, expanded, handleDeleteClick} = this.props;
 
 		const panePanelStyle = {
 			height: expanded ? `${height}px` : `height:0px`
@@ -54,12 +50,12 @@ class DepartmentPane extends Component {
 
 		return (
 
-			<div>
-				<h3
+			<DivPanel>
+				<H3
 					onClick={this.onPaneClick}
 					className="accordion__pane--header"
 					aria-controls={`dept_pane_${id}`}
-					aria-expanded={!!expanded && !currentPaneExpanded}>{label}<button className="toggle">toggle</button> </h3>
+					aria-expanded={!!expanded && !currentPaneExpanded}>{label}<button className="toggle">toggle</button> </H3>
 				<div
 					id={`dept_pane_${id}`}
 					className="accordion__pane--panel"
@@ -67,10 +63,10 @@ class DepartmentPane extends Component {
 					aria-expanded={!!expanded}
 					aria-selected={!!expanded}>
 
-					<Form handleDelete={this.handleDelete} departmentId={id} departmentLabel={label} />
+					<Form handleDelete={handleDeleteClick} departmentId={id} departmentLabel={label} />
 
 				</div>
-			</div>
+			</DivPanel>
 
 		)
 	}

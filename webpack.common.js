@@ -28,9 +28,6 @@ module.exports = {
 	    new webpack.optimize.CommonsChunkPlugin({
 		    name: 'manifest'
 	    }),
-        /*new webpack.optimize.CommonsChunkPlugin({
-            name: 'runtime'
-        }),*/
         new ExtractTextPlugin({
             disable: false,
             //filename: '[name].[contentHash].css',
@@ -43,7 +40,6 @@ module.exports = {
             minify: true
         }),
 	    new BrowserSyncPlugin({
-		    //proxy: config.proxyUrl,
 		    proxy: config.devUrl,
 		    files: config.watch,
 		    reloadDelay: config.reloadDelay,
