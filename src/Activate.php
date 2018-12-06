@@ -63,12 +63,21 @@ class Activate {
 		  ) ENGINE=InnoDB ' . self::$charset_collate;
 	}
 
+	/**
+	 * Add sample department name
+	 * @return string
+	 */
+	private static function getSampleDeptSql() {
+		return 'INSERT INTO `' . self::$prefix . 'hours_of_operation_dept` (`label`) VALUES (\'First Department\')';
+	}
+
 	private static function installSchema() {
 		global $wpdb;
 		$connection = new Connection( $wpdb );
 
 		$sql[] = self::getSchemaSql();
 		$sql[] = self::getSchemaDeptSql();
+		$sql[] = self::getSampleDeptSql();
 
 		foreach( $sql as $value ) {
 			$connection->query( $value );
